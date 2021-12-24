@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h1>EVN Utils</h1>
+
+    <p id='hth'></p>
+    <script>
+      let from = new Date()
+      let end = new Date()
+      from.setDate(from.getDate() - 15);
+      end.setDate(end.getDate() + 15);
+      fetch(`https://cskh.evnspc.vn/TraCuu/GetThongTinLichNgungGiamMaKhachHang?tuNgay=${formatDate(from)}&denNgay=${formatDate(end)}&maKH=PB09030032664&ChucNang=MaKhachHang`)
+  .then(response => response.json())
+  .then(data => {
+    let hth = document.getElementById('hth')[0]
+    hth.html(data)
+  });
+
+  function formatDate(d) {
+    var 
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [day, month, year].join('-');
+}
+    </script>
+  </body>
+</html>
